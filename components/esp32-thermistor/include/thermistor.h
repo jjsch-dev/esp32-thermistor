@@ -94,7 +94,7 @@ uint32_t thermistor_read_vout(thermistor_handle_t* th);
  * @return
  *      - Temperature in degrees Celsius.
  */
-float thermistor_vout_to_celcius(thermistor_handle_t* th, uint32_t vout);
+float thermistor_vout_to_celsius(thermistor_handle_t* th, uint32_t vout);
 
 /**
  * @brief Get temperature in degrees Celsius from the thermistor.
@@ -107,7 +107,17 @@ float thermistor_vout_to_celcius(thermistor_handle_t* th, uint32_t vout);
  * @return
  *      - Temperature in degrees Celsius.
  */
-float thermistor_get_celcius(thermistor_handle_t* th);
+float thermistor_get_celsius(thermistor_handle_t* th);
+
+/**
+ * @brief Convert temperature in degrees Celsius to Fahrenheit.
+ *
+ * @param   temp  Temperature in degrees Celsius.
+ *
+ * @return
+ *      - Temperature in degrees Fahrenheit.
+ */
+float thermistor_celsius_to_fahrenheit(float temp);
 
 #ifdef __cplusplus
 }

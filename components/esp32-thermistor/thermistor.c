@@ -109,7 +109,7 @@ uint32_t thermistor_init(thermistor_handle_t* th,
     return ESP_OK;
 }
 
-float thermistor_vout_to_celcius(thermistor_handle_t* th, uint32_t vout)
+float thermistor_vout_to_celsius(thermistor_handle_t* th, uint32_t vout)
 {
     float steinhart;
        
@@ -140,9 +140,14 @@ uint32_t thermistor_read_vout(thermistor_handle_t* th)
     return esp_adc_cal_raw_to_voltage(adc_reading, adc_chars);
 }
 
-float thermistor_get_celcius(thermistor_handle_t* th)
+float thermistor_get_celsius(thermistor_handle_t* th)
 {
     th->vout = thermistor_read_vout(th);
     
-    return thermistor_vout_to_celcius(th, th->vout);
+    return thermistor_vout_to_celsius(th, th->vout);
+}
+
+float thermistor_celsius_to_fahrenheit(float temp)
+{
+    return (temp * 1.8) + 32;
 }

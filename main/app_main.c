@@ -90,12 +90,13 @@ void app_main(void)
     init_led();
  
     while(1) {
-        float temperature = thermistor_get_celcius(&th);
-        
-        ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C\tResistance: %.0f ohm", 
-                 th.vout, temperature, th.t_resistance);
+        float celsius = thermistor_get_celsius(&th);
+        float fahrenheit = thermistor_celsius_to_fahrenheit(celsius);
 
-        show_temp(temperature);
+        ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C / %2.1f F:\tResistance: %.0f ohm", 
+                 th.vout, celsius, fahrenheit, th.t_resistance);
+
+        show_temp(celsius);
         vTaskDelay(200 / portTICK_PERIOD_MS);
     }
 }
