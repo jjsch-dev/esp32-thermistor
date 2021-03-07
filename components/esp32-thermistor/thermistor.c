@@ -58,13 +58,7 @@ static void check_efuse(void)
     } else {
         ESP_LOGI(TAG, "eFuse Vref: NOT supported");
     }
-#elif CONFIG_IDF_TARGET_ESP32S2
-    if (esp_adc_cal_check_efuse(ESP_ADC_CAL_VAL_EFUSE_TP) == ESP_OK) {
-        ESP_LOGI(TAG, "eFuse Two Point: Supported");
-    } else {
-        ESP_LOGI(TAG, "Cannot retrieve eFuse Two Point calibration values. Default calibration values will be used.");
-    }
-#elif CONFIG_IDF_TARGET_ESP32C3
+#elif CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32C3
     if (esp_adc_cal_check_efuse(ESP_ADC_CAL_VAL_EFUSE_TP) == ESP_OK) {
         ESP_LOGI(TAG, "eFuse Two Point: Supported");
     } else {
