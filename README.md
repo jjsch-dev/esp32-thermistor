@@ -1,6 +1,6 @@
 # ESP32 Thermistor Example
 
-This is an example of using the component [ESP32-THERMISTOR] (https://github.com/) to measure the temperature using a [thermistor] (https://www.murata.com/~/media/Webrenewal/Support /library/catalog/products/thermistor/ntc/r44e.ashx?la=en-us) connected to an ADC channel of ESP32-C3.
+This is an example of using the component [esp32-thermistor] (https://github.com/) to measure the temperature using a [thermistor] (https://www.murata.com/~/media/Webrenewal/Support /library/catalog/products/thermistor/ntc/r44e.ashx?la=en-us) connected to an ADC channel of ESP32-C3.
 
 ![alt text](images/NXRT15WF104FA1B.png)
 
