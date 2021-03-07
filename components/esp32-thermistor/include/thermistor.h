@@ -111,7 +111,7 @@ uint32_t thermistor_read_vout(thermistor_handle_t* th);
 /**
  * @brief Converts the output voltage of the divider to degrees Celsius.
  *
- * To linearize the thermistor output use the simplified steniarth equation.
+ * To linearize the thermistor output use the simplified Steniarth equation.
  *
  * @param   th  Pointer of the driver information.
  * @param   vout Output voltage of the resistive divider in mV.
