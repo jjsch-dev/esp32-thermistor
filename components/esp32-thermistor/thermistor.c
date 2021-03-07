@@ -76,32 +76,35 @@ static void print_char_val_type(esp_adc_cal_value_t val_type)
     }
 }
 
-uint32_t thermistor_init(thermistor_handle_t* th,
-                         adc_channel_t channel, float serial_resistance, 
-                         float nominal_resistance, float nominal_temperature, 
-                         float beta_val, float vsource)
+esp_err_t thermistor_init(thermistor_handle_t* th,
+                          adc_channel_t channel, float serial_resistance, 
+                          float nominal_resistance, float nominal_temperature, 
+                          float beta_val, float vsource)
 {
     //Check if Two Point or Vref are burned into eFuse
     check_efuse();
 
     //Configure ADC
-    adc1_config_channel_atten(channel, atten);
-    //Characterize ADC
-    adc_chars = calloc(1, sizeof(esp_adc_cal_characteristics_t));
-    esp_adc_cal_value_t val_type = esp_adc_cal_characterize(ADC_UNIT_1, atten, width, DEFAULT_VREF, adc_chars);
-    print_char_val_type(val_type);
+    esp_err_t err = adc1_config_channel_atten(channel, atten);
+    
+    if (err == ESP_OK) {
+        //Characterize ADC
+        adc_chars = calloc(1, sizeof(esp_adc_cal_characteristics_t));
+        esp_adc_cal_value_t val_type = esp_adc_cal_characterize(ADC_UNIT_1, atten, width, DEFAULT_VREF, adc_chars);
+        print_char_val_type(val_type);
 
-    ESP_LOGI(TAG, "Vref: %dmV", adc_chars->vref);
+        ESP_LOGI(TAG, "Vref: %dmV", adc_chars->vref);
 
-    th->channel = channel;
-    th->serial_resistance = serial_resistance; 
-    th->nominal_resistance = nominal_resistance;
-    th->nominal_temperature = nominal_temperature;
-    th->beta_val = beta_val;
-    th->vsource = vsource;
-    th->t_resistance = 0;
-
-    return ESP_OK;
+        th->channel = channel;
+        th->serial_resistance = serial_resistance; 
+        th->nominal_resistance = nominal_resistance;
+        th->nominal_temperature = nominal_temperature;
+        th->beta_val = beta_val;
+        th->vsource = vsource;
+        th->t_resistance = 0;
+    }
+    
+    return err;
 }
 
 float thermistor_vout_to_celsius(thermistor_handle_t* th, uint32_t vout)
