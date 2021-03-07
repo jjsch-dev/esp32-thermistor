@@ -24,13 +24,14 @@
 
 /**
  * @file app_main.c
- * @brief Example of use of the thermistor controller connected to an analog channel 
- * of the ESP-32. 
- * With menuconfig you can configure the parameters used by the initialization function 
- * to get the instance handle.
- * Every 200 mS is invoked the function that reads the voltage from the resistive 
- * divider and converts it to degrees Celsius using the simplified equation of Steniarth.
- * The temperature is displayed on the monitor in degrees Celsius and Fahrenheit.
+ * @brief Example of use of the thermistor component that is connected to an 
+ * analog channel of ESP32. 
+ * With menuconfig, you can configure the parameters used by the initialization 
+ * function to obtain the instance handle.
+ * Each 200 ms is invoked the function that reads the voltage of the resistive 
+ * divider and converts it to degrees Celsius using the simplified equation 
+ * of Steniarth.
+ * The temperature is shown on the monitor in degrees Celsius and Fahrenheit.
  */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -49,8 +50,8 @@ static const char* TAG = "app";
 #endif
 
 /**
- * @brief Initialize the led driver to use, if it is an ESP32-C3 development 
- *        kit there are many possibilities that it has a neopixel connected.
+ * @brief Initialize the LED driver, with the ESP32-C3-Devkitm, 
+ *        a neopixel is used for the rest a standard LED.
  */
 static esp_err_t init_led(void)
 {
@@ -67,8 +68,8 @@ esp_err_t err = ESP_OK;
 }
 
 /**
- * @brief If the led is neopixel, the color saturation changes with the 
- *        temperature value, if it is a led it toggle each time it is called.
+ * @brief With Neopixel, the saturation of color changes with the value of the 
+ *        temperature, and with the standard LED toggle each time.
  */
 static void show_temp(float temperature)
 {

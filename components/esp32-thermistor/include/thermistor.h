@@ -37,10 +37,10 @@
  * with a series of functions, uses the ADC calibration values recorded in eFuse 
  * to linearize the response.
  * 
- * The raw reading of the resistive divider voltage is converted to mV with the 
- * function esp_adc_cal_raw_to_voltage, and since the supply voltage of the 
- * resistive divider (3.3V) is known, the math is applied to obtain the value 
- * of the thermistor resistance.
+ * The raw reading of the resistive divisor voltage becomes mV with the 
+ * esp_adc_cal_raw_to_voltage function, and since the supply voltage of the 
+ * resistive divider (3.3v) is known, with simple mathematics, the value of 
+ * the resistance of the thermistor is obtained.
  * 
  * To obtain the temperature, the simplified Steniarth's equation is applied, 
  * which uses a logarithm of the coefficient provided by the manufacturer of 
@@ -85,7 +85,7 @@ typedef struct
  * @param   nominal_resistance Nominal resistance at 25 degrees Celsius of thermistor.
  * @param   nominal_temperature Nominal temperature of the thermistor, usually 25 degress Celsius.
  * @param   beta_val Beta coefficient of the thermistor.
- * @param   vsource Voltage to which the serial resistance is connected in mV, usually 3300.0.
+ * @param   vsource Voltage to which the series resistance is connected in mV, typically 3300.0.
  *
  * @return
  *      - ESP_OK: Initialization OK.
@@ -135,7 +135,7 @@ float thermistor_vout_to_celsius(thermistor_handle_t* th, uint32_t vout);
 float thermistor_get_celsius(thermistor_handle_t* th);
 
 /**
- * @brief Convert temperature in degrees Celsius to Fahrenheit.
+ * @brief Convert temperature of degrees Celsius to Fahrenheit.
  *
  * @param   temp  Temperature in degrees Celsius.
  *
