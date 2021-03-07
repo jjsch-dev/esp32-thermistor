@@ -21,11 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <stdio.h>
-#include <stdatomic.h>
+
+/**
+ * @file app_main.c
+ * @brief Example of use of the thermistor controller connected to an analog channel 
+ * of the ESP-32. 
+ * With menuconfig you can configure the parameters used by the initialization function 
+ * to get the instance handle.
+ * Every 200 mS is invoked the function that reads the voltage from the resistive 
+ * divider and converts it to degrees Celsius using the simplified equation of Steniarth.
+ * The temperature is displayed on the monitor in degrees Celsius and Fahrenheit.
+ */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "freertos/queue.h"
 #include "driver/gpio.h"
 #include "thermistor.h"
 
@@ -40,11 +48,10 @@ static const char* TAG = "app";
     #define DEFAULT_BRIGHTNESS  50
 #endif
 
-/* Can use project configuration menu (idf.py menuconfig) to choose the GPIO to blink,
-   or you can edit the following line and set a number here.
-*/
-#define BLINK_GPIO CONFIG_BLINK_GPIO
-
+/**
+ * @brief Initialize the led driver to use, if it is an ESP32-C3 development 
+ *        kit there are many possibilities that it has a neopixel connected.
+ */
 static esp_err_t init_led(void)
 {
 esp_err_t err = ESP_OK;
@@ -53,19 +60,16 @@ esp_err_t err = ESP_OK;
     err = ws2812_led_init();
     ESP_LOGI(TAG, "ws2812_led_init: %d", err);
 #else
-    /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
-       muxed to GPIO on reset already, but some default to other
-       functions and need to be switched to GPIO. Consult the
-       Technical Reference for a list of pads and their default
-       functions.)
-    */
-    gpio_reset_pin(BLINK_GPIO);
-    /* Set the GPIO as a push/pull output input*/
-    gpio_set_direction(BLINK_GPIO, GPIO_MODE_INPUT_OUTPUT);
+    gpio_reset_pin(CONFIG_BLINK_GPIO);
+    gpio_set_direction(CONFIG_BLINK_GPIO, GPIO_MODE_INPUT_OUTPUT);
 #endif
     return err;
 }
 
+/**
+ * @brief If the led is neopixel, the color saturation changes with the 
+ *        temperature value, if it is a led it toggle each time it is called.
+ */
 static void show_temp(float temperature)
 {
 #ifdef CONFIG_IDF_TARGET_ESP32C3
@@ -73,7 +77,7 @@ static void show_temp(float temperature)
     ws2812_led_set_hsv(g_hue, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS);
 #else
     /* Toggle output */
-    gpio_set_level(BLINK_GPIO, !gpio_get_level(BLINK_GPIO));
+    gpio_set_level(CONFIG_BLINK_GPIO, !gpio_get_level(CONFIG_BLINK_GPIO));
 #endif
 }
 
