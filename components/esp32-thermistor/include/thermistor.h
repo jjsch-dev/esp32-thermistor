@@ -90,10 +90,10 @@ typedef struct
  * @return
  *      - ESP_OK: Initialization OK.
  */
-uint32_t thermistor_init(thermistor_handle_t* th,
-                         adc_channel_t channel, float serie_resistance, 
-                         float nominal_resistance, float nominal_temperature, 
-                         float beta_val, float vsource);
+esp_err_t thermistor_init(thermistor_handle_t* th,
+                          adc_channel_t channel, float serie_resistance, 
+                          float nominal_resistance, float nominal_temperature, 
+                          float beta_val, float vsource);
 
 /**
  * @brief Read the vout of the resistance divider in mV.
