@@ -31,14 +31,14 @@
 
 #include "sdkconfig.h"
 
+#include "esp_log.h"
+static const char* TAG = "app";
+
 #ifdef CONFIG_IDF_TARGET_ESP32C3
     #include <ws2812_led.h>
     #define DEFAULT_SATURATION  100
     #define DEFAULT_BRIGHTNESS  50
 #endif
-
-//#include "esp_log.h"
-//static const char* TAG = "thr";
 
 /* Can use project configuration menu (idf.py menuconfig) to choose the GPIO to blink,
    or you can edit the following line and set a number here.
@@ -51,7 +51,7 @@ esp_err_t err = ESP_OK;
 
 #ifdef CONFIG_IDF_TARGET_ESP32C3
     err = ws2812_led_init();
-    printf("ws2812_led_init: %d\n", err);
+    ESP_LOGI(TAG, "ws2812_led_init: %d", err);
 #else
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -60,8 +60,8 @@ esp_err_t err = ESP_OK;
        functions.)
     */
     gpio_reset_pin(BLINK_GPIO);
-    /* Set the GPIO as a push/pull output */
-    gpio_set_direction(BLINK_GPIO, GPIO_MODE_OUTPUT);
+    /* Set the GPIO as a push/pull output input*/
+    gpio_set_direction(BLINK_GPIO, GPIO_MODE_INPUT_OUTPUT);
 #endif
     return err;
 }
@@ -90,9 +90,10 @@ void app_main(void)
     init_led();
  
     while(1) {
-        uint32_t vout = thermistor_read_vout(&th);
-        float temperature = thermistor_vout_to_temp(&th, vout);
-        printf("Voltage: %dmV\tTemperature: %2.1f C\tResistance: %.0f\n", vout, temperature, th.t_resistance);
+        float temperature = thermistor_get_celcius(&th);
+        
+        ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C\tResistance: %.0f ohm", 
+                 th.vout, temperature, th.t_resistance);
 
         show_temp(temperature);
         vTaskDelay(200 / portTICK_PERIOD_MS);

@@ -44,7 +44,8 @@ typedef struct
     float nominal_temperature;      /**< Nominal temperature of the thermistor, usually 25 degress Celsius*/
     float beta_val;                 /**< Beta coefficient of the thermistor*/
     float vsource;                  /**< Voltage to which the serial resistance is connected in mV, usually 3300.0*/
-    float t_resistance;             /**< Calculated thermistor resistance.*/                          
+    float t_resistance;             /**< Calculated thermistor resistance.*/
+    uint32_t vout;                  /**< Voltage in mV of thermistor channel.*/                          
 } thermistor_handle_t;
 
 /**
@@ -93,7 +94,7 @@ uint32_t thermistor_read_vout(thermistor_handle_t* th);
  * @return
  *      - Temperature in degrees Celsius.
  */
-float thermistor_vout_to_temp(thermistor_handle_t* th, uint32_t vout);
+float thermistor_vout_to_celcius(thermistor_handle_t* th, uint32_t vout);
 
 /**
  * @brief Get temperature in degrees Celsius from the thermistor.
@@ -106,7 +107,7 @@ float thermistor_vout_to_temp(thermistor_handle_t* th, uint32_t vout);
  * @return
  *      - Temperature in degrees Celsius.
  */
-float thermistor_temp(thermistor_handle_t* th);
+float thermistor_get_celcius(thermistor_handle_t* th);
 
 #ifdef __cplusplus
 }

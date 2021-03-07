@@ -73,11 +73,11 @@ static void check_efuse(void)
 static void print_char_val_type(esp_adc_cal_value_t val_type)
 {
     if (val_type == ESP_ADC_CAL_VAL_EFUSE_TP) {
-        ESP_LOGI(TAG, "Characterized using Two Point Value\n");
+        ESP_LOGI(TAG, "Characterized using Two Point Value");
     } else if (val_type == ESP_ADC_CAL_VAL_EFUSE_VREF) {
-        ESP_LOGI(TAG, "Characterized using eFuse Vref\n");
+        ESP_LOGI(TAG, "Characterized using eFuse Vref");
     } else {
-        ESP_LOGI(TAG, "Characterized using Default Vref\n");
+        ESP_LOGI(TAG, "Characterized using Default Vref");
     }
 }
 
@@ -109,7 +109,7 @@ uint32_t thermistor_init(thermistor_handle_t* th,
     return ESP_OK;
 }
 
-float thermistor_vout_to_temp(thermistor_handle_t* th, uint32_t vout)
+float thermistor_vout_to_celcius(thermistor_handle_t* th, uint32_t vout)
 {
     float steinhart;
        
@@ -140,9 +140,9 @@ uint32_t thermistor_read_vout(thermistor_handle_t* th)
     return esp_adc_cal_raw_to_voltage(adc_reading, adc_chars);
 }
 
-float thermistor_temp(thermistor_handle_t* th)
+float thermistor_get_celcius(thermistor_handle_t* th)
 {
-    uint32_t vout = thermistor_read_vout(th);
+    th->vout = thermistor_read_vout(th);
     
-    return thermistor_vout_to_temp(th, vout);
+    return thermistor_vout_to_celcius(th, th->vout);
 }
