@@ -18,3 +18,14 @@ Espressif [recomend](https://docs.espressif.com/projects/esp-idf/en/latest/esp32
 
 ![alt text](images/adc-noise-graph.png)
 
+## Prototype 
+
+This component is the thermostat of an IOT project of the ceiling fan, so I started testing it on the next development board.
+
+![alt text](images/pcb_proto_1.png)
+
+## Behavior analysis
+
+To evaluate the performance of a thermistor that is connected to an analog digital converter, (in addition to the quality and precision of it), many things can alter the result, for example the stability of the power source, the Ripple of VDD 3.3V , the resolution of the series resistance, but especially the linearity of the ADC converter that has implemented Espressif in ESP32.
+I must say that the quality of the ESP32-C3 has surprised me, after using the characterization function of the ADC, the mV measurement is extremely accurate for a processor of this price. 
+
