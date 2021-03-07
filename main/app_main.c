@@ -80,7 +80,12 @@ static void show_temp(float temperature)
 void app_main(void)
 {
     thermistor_handle_t th;
-    thermistor_init(&th, ADC_CHANNEL_2, 164000, 100000, 25, 4250, 3330.0);
+    thermistor_init(&th, ADC_CHANNEL_2, 
+                    CONFIG_SERIE_RESISTANCE, 
+                    CONFIG_NOMINAL_RESISTANCE, 
+                    CONFIG_NOMINAL_TEMPERATURE,
+                    CONFIG_BETA_VALUE, 
+                    CONFIG_VOLTAGE_SOURCE);
 
     init_led();
  

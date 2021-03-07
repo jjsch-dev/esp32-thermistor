@@ -1,14 +1,49 @@
 menu "ESP32 Thermistor Configuration"
 
-    config BLINK_GPIO
-        int "Blink GPIO number"
-        range 0 34
-        default 5
-        help
-            GPIO number (IOxx) to blink on and off.
+config SERIE_RESISTANCE
+    int "Serial resistor in ohm"
+    range 0 200000
+    default 164000
+    help
+        Value of the serial resistor connected to +3V.
 
-            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.
+config NOMINAL_RESISTANCE
+    int "Th nominal resistor in ohm"
+    range 0 200000
+    default 100000
+    help
+        Nominal resistance at 25 degrees Celsius of thermistor.
 
-            GPIOs 35-39 are input-only so cannot be used as outputs.
+config NOMINAL_TEMPERATURE
+    int "Th nominal temperature in celcius"
+    range 0 50
+    default 25
+    help
+        Nominal temperature of the thermistor, usually 25 degress Celsius.
+
+config BETA_VALUE
+    int "Betha coefficient from thermistor manufacturer"
+    range 0 100000
+    default 4250
+    help
+        Beta coefficient of the thermistor.
+        
+config VOLTAGE_SOURCE
+    int "Voltage source CPU in mV"
+    range 0 5000
+    default 3330
+    help
+        Voltage to which the serial resistance is connected in mV, usually 3300.
+
+config BLINK_GPIO
+    int "Blink GPIO number"
+    range 0 34
+    default 5
+    help
+        GPIO number (IOxx) to blink on and off.
+
+        Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.
+
+        GPIOs 35-39 are input-only so cannot be used as outputs.
 
 endmenu
