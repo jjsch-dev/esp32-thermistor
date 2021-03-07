@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+/**
+ * @file thermistor.c
+ * @brief Driver implementation of thermistor component for ESP32.
+ */
+
 #include "thermistor.h"
 
 #include "driver/gpio.h"

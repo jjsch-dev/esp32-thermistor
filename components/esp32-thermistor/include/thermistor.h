@@ -22,6 +22,31 @@
  * SOFTWARE.
  */
 
+/**
+ * @file thermistor.h
+ * @brief API definitions for adc thermistor driver for ESP32.
+ *
+ * This component provides a means to interface with a thermistor connected 
+ * to an analog digital channel of an esp32 processor using the Espressif IDF.
+ *
+ * The thermistor is part of a resistive divider, where one of its ends is 
+ * connected to GND and the other to the digital analog channel plus the series 
+ * resistor whose end is connected to 3.3 V.
+ * 
+ * The ADC initialization is carried out with the esp_adc_cal module which, 
+ * with a series of functions, uses the ADC calibration values recorded in eFuse 
+ * to linearize the response.
+ * 
+ * The raw reading of the resistive divider voltage is converted to mV with the 
+ * function esp_adc_cal_raw_to_voltage, and since the supply voltage of the 
+ * resistive divider (3.3V) is known, the math is applied to obtain the value 
+ * of the thermistor resistance.
+ * 
+ * To obtain the temperature, the simplified Steniarth's equation is applied, 
+ * which uses a logarithm of the coefficient provided by the manufacturer of 
+ * the thermistor to linerize it.
+ */
+
 #ifndef __THERMISTOR_H__
 #define __THERMISTOR_H__
 
