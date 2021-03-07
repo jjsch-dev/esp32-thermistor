@@ -45,26 +45,22 @@ static const adc_atten_t atten = ADC_ATTEN_DB_11;
 
 static void check_efuse(void)
 {
-#if CONFIG_IDF_TARGET_ESP32
     //Check if TP is burned into eFuse
     if (esp_adc_cal_check_efuse(ESP_ADC_CAL_VAL_EFUSE_TP) == ESP_OK) {
         ESP_LOGI(TAG, "eFuse Two Point: Supported");
     } else {
-        ESP_LOGI(TAG, "eFuse Two Point: NOT supported");
+        ESP_LOGI(TAG, "Cannot retrieve eFuse Two Point calibration values. Default calibration values will be used.");
     }
+#if CONFIG_IDF_TARGET_ESP32 
     //Check Vref is burned into eFuse
     if (esp_adc_cal_check_efuse(ESP_ADC_CAL_VAL_EFUSE_VREF) == ESP_OK) {
         ESP_LOGI(TAG, "eFuse Vref: Supported");
     } else {
         ESP_LOGI(TAG, "eFuse Vref: NOT supported");
     }
-#elif CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32C3
-    if (esp_adc_cal_check_efuse(ESP_ADC_CAL_VAL_EFUSE_TP) == ESP_OK) {
-        ESP_LOGI(TAG, "eFuse Two Point: Supported");
-    } else {
-        ESP_LOGI(TAG, "Cannot retrieve eFuse Two Point calibration values. Default calibration values will be used.");
-    }
-#else
+#endif
+
+#if !CONFIG_IDF_TARGET_ESP32 && !CONFIG_IDF_TARGET_ESP32S2 && !CONFIG_IDF_TARGET_ESP32C3
     #error "This example is configured for ESP32/ESP32S2/ESP32C3."
 #endif
 }
