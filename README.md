@@ -45,3 +45,33 @@ To get the temperature in degrees Celsius, you must call the `thermistor_get_cel
 
 Note: if you use the example application you can configure this parameters with the `idf.py menuconfig`.
 
+Use Example
+----------------
+```c
+
+    thermistor_handle_t th = {0};
+    ESP_ERROR_CHECK(thermistor_init(&th, ADC_CHANNEL_2, 
+                                    CONFIG_SERIE_RESISTANCE, 
+                                    CONFIG_NOMINAL_RESISTANCE, 
+                                    CONFIG_NOMINAL_TEMPERATURE,
+                                    CONFIG_BETA_VALUE, 
+                                    CONFIG_VOLTAGE_SOURCE));
+    while (1) {
+        float celsius = thermistor_get_celsius(&th);
+        float fahrenheit = thermistor_celsius_to_fahrenheit(celsius);
+
+        ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C / %2.1f F:\tResistance: %.0f ohm", 
+                 th.vout, celsius, fahrenheit, th.t_resistance);
+
+        show_temp(celsius);
+        vTaskDelay(200 / portTICK_PERIOD_MS);
+    }
+```
+## Operation video
+The following section shows the operation of the App thermistor. The video shows the temperature logged on the monitor in degrees Celsius and Fahrenheith along with the divider voltage and the calculated resistance of the thermistor. It also displays the voltage read on an oscilloscope and tester for comparison.
+
+![](images/temp_test.gif)
+
+The video shows the temperature recorded on the monitor in degrees Celsius and Fahrenheith when the thermistor is heated by hand.
+
+![](images/visual_code_temp.gif)
