@@ -29,3 +29,7 @@ This component is the thermostat of an IOT project of the ceiling fan, so I star
 To evaluate the performance of a thermistor that is connected to an analog digital converter, (in addition to the quality and precision of it), many things can alter the result, for example the stability of the power source, the Ripple of VDD 3.3V , the resolution of the series resistance, but especially the linearity of the ADC converter that has implemented Espressif in ESP32.
 I must say that the quality of the ESP32-C3 has surprised me, after using the characterization function of the ADC, the mV measurement is extremely accurate for a processor of this price. 
 
+AC noise with wifi / bluetooth off is better than 15mV.
+
+![alt text](images/TEK_noise.png)
+
