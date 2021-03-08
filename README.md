@@ -38,3 +38,8 @@ AC noise with wifi / bluetooth off is better than 15mV.
 
 ![alt text](images/TEK_noise.png)
 
+## Brief description of the API
+To use the component, you need to get the handle of the instance `thermistor_handle_t` with the function` thermistor_init`, which takes as parameters the series resistance, the nominal resistance of the thermistor, the adc channel, the voltage of the source and the temperature nominal of thermistor.
+
+Note: if you use the example application you can configure this parameters with the `idf.py menuconfig`.
+
