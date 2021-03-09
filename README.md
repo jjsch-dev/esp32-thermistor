@@ -45,6 +45,7 @@ To get the temperature in degrees Celsius, you must call the `thermistor_get_cel
 
 Note: if you use the example application you can configure this parameters with the `idf.py menuconfig`.
 
+<<<<<<< HEAD
 Use Example
 ----------------
 ```c
@@ -74,4 +75,6 @@ The following section shows the operation of the App thermistor. The video shows
 
 The video shows the temperature recorded on the monitor in degrees Celsius and Fahrenheith when the thermistor is heated by hand.
 
+
 ![](images/visual_code_temp.gif)
+
