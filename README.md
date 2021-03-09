@@ -63,7 +63,6 @@ Usage Example
         ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C / %2.1f F:\tResistance: %.0f ohm", 
                  th.vout, celsius, fahrenheit, th.t_resistance);
 
-        show_temp(celsius);
         vTaskDelay(200 / portTICK_PERIOD_MS);
     }
 ```
