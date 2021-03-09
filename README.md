@@ -45,8 +45,7 @@ To get the temperature in degrees Celsius, you must call the `thermistor_get_cel
 
 Note: if you use the example application you can configure this parameters with the `idf.py menuconfig`.
 
-<<<<<<< HEAD
-Use Example
+Usage Example
 ----------------
 ```c
 
