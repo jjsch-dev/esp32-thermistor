@@ -72,7 +72,7 @@ static void check_efuse(void)
 
 /**
  * @brief Log the characterization used to linearize the ADC.
- * @param[in] void .
+ * @param[in] val_type Type of calibration value used in characterization.
  * @return void
  */
 static void print_char_val_type(esp_adc_cal_value_t val_type)

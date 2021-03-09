@@ -125,7 +125,7 @@ float thermistor_vout_to_celsius(thermistor_handle_t* th, uint32_t vout);
  * @brief Get temperature in degrees Celsius from the thermistor.
  *
  * This function calls thermistor_read_vout to read the voltage from the resistive 
- * divider and thermistor_vout_to_temp to convert it to degrees centigrade.
+ * divider and thermistor_vout_to_celsius to convert it to degrees Celsius.
  * 
  * @param   th  Pointer of the driver information.
  *
