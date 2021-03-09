@@ -70,6 +70,8 @@ Use Example
 ## Operation video
 The following section shows the operation of the App thermistor. The video shows the temperature logged on the monitor in degrees Celsius and Fahrenheith along with the divider voltage and the calculated resistance of the thermistor. It also displays the voltage read on an oscilloscope and tester for comparison.
 
+![](images/temp_test.gif)
+
 The video shows the temperature recorded on the monitor in degrees Celsius and Fahrenheith when the thermistor is heated by hand.
 
 ![](images/visual_code_temp.gif)
