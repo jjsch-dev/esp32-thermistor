@@ -12,7 +12,7 @@ The thermistor is part of a resistive divider, where one of its ends is connecte
 
 ![alt text](images/Schematic.png)
 
-It is important to bear in mind that the resistance of the series has to have a tolerance of 1% or better, and if the footprint allows the dissipated power to be better than an order of magnitude of the maximum current that crosses it so that the stability is high.
+It is important to note that the series resistance has to have a tolerance of 1% or better, and if the footprint allows the dissipated power to be better than an order of magnitude than the maximum current through it, then the stability improves.
 
 Espressif [recomend](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html) a 0.1uF capacitor to the ADC input to minimize noise.
 
@@ -26,8 +26,8 @@ This component is the thermostat of an IOT project of the ceiling fan, so I star
 
 ## Behavior analysis
 
-To evaluate the performance of a thermistor that is connected to an analog digital converter, (in addition to the quality and precision of it), many things can alter the result, for example the stability of the power source, the Ripple of VDD 3.3V , the resolution of the series resistance, but especially the linearity of the ADC converter that has implemented Espressif in ESP32.
-I must say that the quality of the ESP32-C3 has surprised me, after using the characterization function of the ADC, the mV measurement is extremely accurate for a processor of this price. 
+To evaluate the performance of a thermistor that is connected to an analog digital converter, (in addition to the quality and precision of the same), many things can alter the result, for example, the stability of the power supply, the Ripple of VDD 3.3 V. , the precision of the series resistor, but especially the linearity of the ADC converter that Espressif has implemented in ESP32.
+I must say that the quality of the ESP32-C3 has surprised me, after using the characterization function of the ADC, the mV measurement is extremely accurate for a processor of this price.
 
 In the following images you can compare the measurement made with the oscilloscope at the analog channel input of the ESP32-C3 and the monitor output where the measured thermistor temperature is logged, as you can see the difference is a few mV.
 
@@ -39,11 +39,11 @@ AC noise with wifi / bluetooth off is better than 15mV.
 ![alt text](images/TEK_noise.png)
 
 ## Brief description of the API
-To use the component, you need to get the handle of the instance `thermistor_handle_t` with the function` thermistor_init`, which takes as parameters the series resistance, the nominal resistance of the thermistor, the adc channel, the voltage of the source and the nominal temperature of thermistor.
+To use the component, you need to get the handle of the instance `thermistor_handle_t` with the function `thermistor_init`, which takes as parameters the series resistance, the nominal resistance of the thermistor, the adc channel, the voltage of the source and the nominal temperature of thermistor.
 
-To get the temperature in degrees Celsius, you must call the `thermistor_get_celsius` function that returns a float, and to convert it to Fahrenheit you can use the` thermistor_celsius_to_fahrenheit` function that also returns a float.
+To get the temperature in degrees Celsius, you must call the `thermistor_get_celsius` function that returns a float, and to convert it to Fahrenheit you can use the `thermistor_celsius_to_fahrenheit` function that also returns a float.
 
-Note: if you use the example application you can configure this parameters with the `idf.py menuconfig`.
+Note: With the sample application, it is possible to configure these parameters with `idf.py menuconfig`.
 
 Usage Example
 ----------------
