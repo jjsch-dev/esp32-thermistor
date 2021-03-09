@@ -50,8 +50,8 @@ static const char* TAG = "app";
 #endif
 
 /**
- * @brief Initialize the LED driver, with the ESP32-C3-Devkitm, 
- *        a neopixel is used for the rest a standard LED.
+ * @brief Initialize the LED driver, with the ESP32-C3-Devkitm a neopixel 
+ *        is used, for ESP32 based boards a standard LED.
  */
 static esp_err_t init_led(void)
 {
@@ -70,11 +70,12 @@ esp_err_t err = ESP_OK;
 /**
  * @brief With Neopixel, the saturation of color changes with the value of the 
  *        temperature, and with the standard LED toggle each time.
+ * @param celius  Temperature in degrees Celsius.
  */
-static void show_temp(float temperature)
+static void temperature_to_light(float celsius)
 {
 #ifdef CONFIG_IDF_TARGET_ESP32C3
-    uint16_t g_hue = (35-(uint16_t)temperature) * 10;
+    uint16_t g_hue = (35-(uint16_t)celsius) * 10;
     ws2812_led_set_hsv(g_hue, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS);
 #else
     /* Toggle output */
@@ -101,7 +102,7 @@ void app_main(void)
         ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C / %2.1f F:\tResistance: %.0f ohm", 
                  th.vout, celsius, fahrenheit, th.t_resistance);
 
-        show_temp(celsius);
+        temperature_to_light(celsius);
         vTaskDelay(200 / portTICK_PERIOD_MS);
     }
 }
