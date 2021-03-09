@@ -4,7 +4,7 @@ This is an example of using the component [esp32-thermistor](https://github.com/
 
 ![alt text](images/NXRT15WF104FA1B.png)
 
-Although the implementation has been demonstrated with the NXRT15WF104FA1B of Murata, knowing the beta coefficient that the manufacturer publishes, can be used any other available in the market with the same component, an examples could be those using 3D printers for bed or the hot-end.
+Although the implementation has been demonstrated with the Murata NXRT15WF104FA1B, knowing the beta coefficient published by the manufacturer, any other available on the market can be used, an example could be those that use [3D printers](https://reprap.org/wiki/Thermistor) for the bed or the hot-end.
 
 ## Circuit
 
