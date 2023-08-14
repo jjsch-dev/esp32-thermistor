@@ -100,7 +100,7 @@ void app_main(void)
         float fahrenheit = thermistor_celsius_to_fahrenheit(celsius);
 
         ESP_LOGI(TAG,"Voltage: %d mV\tTemperature: %2.1f C / %2.1f F:\tResistance: %.0f ohm", 
-                 th.vout, celsius, fahrenheit, th.t_resistance);
+                 (int)th.vout, celsius, fahrenheit, th.t_resistance);
 
         temperature_to_light(celsius);
         vTaskDelay(200 / portTICK_PERIOD_MS);

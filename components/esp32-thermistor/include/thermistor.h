@@ -54,7 +54,9 @@
 extern "C" {
 #endif
 
-#include "driver/adc.h"
+#include "esp_adc/adc_cali.h"
+#include "esp_adc/adc_cali_scheme.h"
+#include "esp_adc/adc_oneshot.h"
 
 /**
  * @brief Structure to storing the thermistor instance.
@@ -63,14 +65,17 @@ extern "C" {
  */
 typedef struct  
 {
-    adc_channel_t channel;          /**< ADC channel pin where the thermistor is connected*/
-    float serial_resistance;        /**< Value of the serial resistor connected to +3V*/
-    float nominal_resistance;       /**< Nominal resistance at 25 degrees Celsius of thermistor*/
-    float nominal_temperature;      /**< Nominal temperature of the thermistor, usually 25 degress Celsius*/
-    float beta_val;                 /**< Beta coefficient of the thermistor*/
-    float vsource;                  /**< Voltage to which the serial resistance is connected in mV, usually 3300.0*/
-    float t_resistance;             /**< Calculated thermistor resistance.*/
-    uint32_t vout;                  /**< Voltage in mV of thermistor channel.*/                          
+    adc_oneshot_unit_handle_t adc_h;/**< ADC handle. */
+    adc_channel_t channel;          /**< ADC channel pin where the thermistor is connected. */
+    float serial_resistance;        /**< Value of the serial resistor connected to +3V. */
+    float nominal_resistance;       /**< Nominal resistance at 25 degrees Celsius of thermistor. */
+    float nominal_temperature;      /**< Nominal temperature of the thermistor, usually 25 degress Celsius. */
+    float beta_val;                 /**< Beta coefficient of the thermistor. */
+    float vsource;                  /**< Voltage to which the serial resistance is connected in mV, usually 3300.0. */
+    float t_resistance;             /**< Calculated thermistor resistance. */
+    uint32_t vout;                  /**< Voltage in mV of thermistor channel. */ 
+    bool calibrated;                /**< The calibration ADC was succesfull. */  
+    adc_cali_handle_t adc_cali_h;   /**< Calibration information handle. */                       
 } thermistor_handle_t;
 
 /**
