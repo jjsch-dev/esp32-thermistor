@@ -54,13 +54,13 @@ esp_err_t thermistor_init(thermistor_handle_t* th,
     if (err == ESP_OK) {
         adc_oneshot_chan_cfg_t config = {
                     .bitwidth = ADC_BITWIDTH_12, 
-                    .atten = ADC_ATTEN_DB_11,
+                    .atten = ADC_ATTEN_DB_12,
         };
         
         err = adc_oneshot_config_channel(adc_handle, channel, &config);
 
         adc_cali_handle_t adc_cali_handle = NULL;
-        th->calibrated = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN_DB_11, &adc_cali_handle);
+        th->calibrated = adc_calibration_init(ADC_UNIT_1, ADC_ATTEN_DB_12, &adc_cali_handle);
         th->channel = channel;
         th->adc_h = adc_handle;
         th->adc_cali_h = adc_cali_handle;
